@@ -1,0 +1,1061 @@
+<ng-container *ngIf="isLoad === true; then content; else alert">
+</ng-container>
+<ng-template #content>
+  <div class="container">
+    <h2 class="section-title">Credit Application</h2>
+    <form
+      [formGroup]="creditApplicationForm"
+      (ngSubmit)="onSubmitCreditApplication(creditApplicationForm.value)"
+    >
+      <div class="row">
+        <div class="col-12">
+          <h4>Borrower Info</h4>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Applicant Name"
+              formControlName="applicantName"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.applicantName"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('applicantName')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('applicantName').dirty ||
+                    creditApplicationForm.get('applicantName').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              [matDatepicker]="applicantDOBPicker"
+              placeholder="Applicant DOB"
+              formControlName="applicantDOB"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="applicantDOBPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #applicantDOBPicker></mat-datepicker>
+            <mat-error
+              *ngFor="let validation of validation_messages.applicantDOB"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('applicantDOB')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('applicantDOB').dirty ||
+                    creditApplicationForm.get('applicantDOB').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Applicant Drivers License No"
+              formControlName="applicantDriverLicenseNo"
+              required
+            />
+            <mat-error
+              *ngFor="
+                let validation of validation_messages.applicantDriverLicenseNo
+              "
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('applicantDriverLicenseNo')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('applicantDriverLicenseNo')
+                    .dirty ||
+                    creditApplicationForm.get('applicantDriverLicenseNo')
+                      .touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Applicant Social Security No"
+              formControlName="applicantSocialSecurityNo"
+              onfocus="this.placeholder='Ex: ###-##-####'"
+              required
+            />
+            <mat-error
+              *ngFor="
+                let validation of validation_messages.applicantSocialSecurityNo
+              "
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('applicantSocialSecurityNo')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('applicantSocialSecurityNo')
+                    .dirty ||
+                    creditApplicationForm.get('applicantSocialSecurityNo')
+                      .touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Gender" required>
+              <mat-option
+                *ngFor="let applicantGender of applicantGenders"
+                [value]="applicantGender"
+              >
+                {{ applicantGender }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngFor="let validation of validation_messages.applicantGender"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('applicantGender')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('applicantGender').dirty ||
+                    creditApplicationForm.get('applicantGender').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Race" required>
+              <mat-option
+                *ngFor="let applicantRace of applicantRaces"
+                [value]="applicantRace"
+              >
+                {{ applicantRace }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngFor="let validation of validation_messages.applicantRace"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('applicantRace')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('applicantRace').dirty ||
+                    creditApplicationForm.get('applicantRace').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Current Customer Number"
+              formControlName="currentCustomerNumber"
+            />
+            <mat-error
+              *ngFor="
+                let validation of validation_messages.currentCustomerNumber
+              "
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('currentCustomerNumber')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('currentCustomerNumber').dirty ||
+                    creditApplicationForm.get('currentCustomerNumber').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-select
+              (selectionChange)="onChangeIsMarriedOption($event)"
+              placeholder="Are You Married?"
+              required
+            >
+              <mat-option
+                *ngFor="let isMarriedOption of isMarriedOptions"
+                [value]="isMarriedOption"
+              >
+                {{ isMarriedOption }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngFor="let validation of validation_messages.isMarriedOption"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('isMarriedOption')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('isMarriedOption').dirty ||
+                    creditApplicationForm.get('isMarriedOption').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="isMarriedOption === 'Yes'" class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Spouse's Name"
+              formControlName="spouseName"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.spouseName"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('spouseName')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('spouseName').dirty ||
+                    creditApplicationForm.get('spouseName').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="isMarriedOption == 'Yes'" class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              [matDatepicker]="spouseDOBPicker"
+              placeholder="Spouse's DOB"
+              formControlName="spouseDOB"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="spouseDOBPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #spouseDOBPicker></mat-datepicker>
+            <mat-error *ngFor="let validation of validation_messages.spouseDOB">
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('spouseDOB')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('spouseDOB').dirty ||
+                    creditApplicationForm.get('spouseDOB').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="isMarriedOption == 'Yes'" class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Spouse's Drivers License No"
+              formControlName="spouseDriverLicenseNo"
+              required
+            />
+            <mat-error
+              *ngFor="
+                let validation of validation_messages.spouseDriverLicenseNo
+              "
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('spouseDriverLicenseNo')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('spouseDriverLicenseNo').dirty ||
+                    creditApplicationForm.get('spouseDriverLicenseNo').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="isMarriedOption == 'Yes'" class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Spouse's Social Security No"
+              formControlName="spouseSocialSecurityNo"
+              required
+            />
+            <mat-error
+              *ngFor="
+                let validation of validation_messages.spouseSocialSecurityNo
+              "
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('spouseSocialSecurityNo')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('spouseSocialSecurityNo').dirty ||
+                    creditApplicationForm.get('spouseSocialSecurityNo').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <h6>Home Address</h6>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Address"
+              formControlName="homeAddress"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.homeAddress"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('homeAddress')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('homeAddress').dirty ||
+                    creditApplicationForm.get('homeAddress').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder=""
+              formControlName="homeAddressOptional"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="City"
+              formControlName="homeAddressCity"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.homeAddressCity"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('homeAddressCity')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('homeAddressCity').dirty ||
+                    creditApplicationForm.get('homeAddressCity').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="State" required>
+              <mat-option
+                *ngFor="let homeAddressState of homeAddressStates"
+                [value]="homeAddressState"
+              >
+                {{ homeAddressState }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngFor="let validation of validation_messages.homeAddressState"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('homeAddressState')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('homeAddressState').dirty ||
+                    creditApplicationForm.get('homeAddressState').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="ZipCode"
+              formControlName="homeAddressZipCode"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.homeAddressZipCode"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('homeAddressZipCode')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('homeAddressZipCode').dirty ||
+                    creditApplicationForm.get('homeAddressZipCode').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <h6>Business Address</h6>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Company Name"
+              formControlName="companyName"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.companyName"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('companyName')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('companyName').dirty ||
+                    creditApplicationForm.get('companyName').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Company FEIN Number"
+              formControlName="companyFEIN"
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.companyFEIN"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('companyFEIN')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('companyFEIN').dirty ||
+                    creditApplicationForm.get('companyFEIN').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Address"
+              formControlName="businessAddress"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.businessAddress"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('businessAddress')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('businessAddress').dirty ||
+                    creditApplicationForm.get('businessAddress').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder=""
+              formControlName="businessAddressOptional"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="City"
+              formControlName="businessAddressCity"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.businessAddressCity"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('businessAddressCity')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('businessAddressCity').dirty ||
+                    creditApplicationForm.get('businessAddressCity').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="State" required>
+              <mat-option
+                *ngFor="let businessAddressState of businessAddressStates"
+                [value]="businessAddressState"
+              >
+                {{ businessAddressState }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngFor="
+                let validation of validation_messages.businessAddressState
+              "
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('businessAddressState')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('businessAddressState').dirty ||
+                    creditApplicationForm.get('businessAddressState').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="ZipCode"
+              formControlName="businessAddressZipCode"
+              required
+            />
+            <mat-error
+              *ngFor="
+                let validation of validation_messages.businessAddressZipCode
+              "
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('businessAddressZipCode')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('businessAddressZipCode').dirty ||
+                    creditApplicationForm.get('businessAddressZipCode').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12">
+          <h4>Credit Related Questions</h4>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Credit Amount Requested"
+              formControlName="creditAmount"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.creditAmount"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('creditAmount')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('creditAmount').dirty ||
+                    creditApplicationForm.get('creditAmount').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Name of Personal Bank"
+              formControlName="personalBankName"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.personalBankName"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('personalBankName')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('personalBankName').dirty ||
+                    creditApplicationForm.get('personalBankName').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Name of Business Bank"
+              formControlName="businessBankName"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.businessBankName"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('businessBankName')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('businessBankName').dirty ||
+                    creditApplicationForm.get('businessBankName').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <mat-select
+              (selectionChange)="onChangeHaveBankruptcyOption($event)"
+              placeholder="Have You Ever Filed for bankruptcy?"
+              required
+            >
+              <mat-option
+                *ngFor="let haveBankruptcyOption of haveBankruptcyOptions"
+                [value]="haveBankruptcyOption"
+              >
+                {{ haveBankruptcyOption }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngFor="
+                let validation of validation_messages.haveBankruptcyOption
+              "
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('haveBankruptcyOption')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('haveBankruptcyOption').dirty ||
+                    creditApplicationForm.get('haveBankruptcyOption').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="haveBankruptcyOption === 'Yes'" class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              [matDatepicker]="bankruptcyDate"
+              placeholder="Date of Bankruptcy"
+              formControlName="bankruptcyDate"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="bankruptcyDate"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #bankruptcyDate></mat-datepicker>
+            <mat-error
+              *ngFor="let validation of validation_messages.bankruptcyDate"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('bankruptcyDate')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('bankruptcyDate').dirty ||
+                    creditApplicationForm.get('bankruptcyDate').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="haveBankruptcyOption === 'Yes'" class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Bankruptcy Jurisdiction"
+              formControlName="bankruptcyJurisdiction"
+              required
+            />
+            <mat-error
+              *ngFor="
+                let validation of validation_messages.bankruptcyJurisdiction
+              "
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('bankruptcyJurisdiction')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('bankruptcyJurisdiction').dirty ||
+                    creditApplicationForm.get('bankruptcyJurisdiction').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <mat-select
+              placeholder="Have you been sued for defaulting on a debt in the past two years?"
+              required
+            >
+              <mat-option
+                *ngFor="
+                  let suedForDebtDefaultPast2yrsOption of suedForDebtDefaultPast2yrsOptions
+                "
+                [value]="suedForDebtDefaultPast2yrsOption"
+              >
+                {{ suedForDebtDefaultPast2yrsOption }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngFor="
+                let validation of validation_messages.suedForDebtDefaultPast2yrsOption
+              "
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('suedForDebtDefaultPast2yrsOption')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('suedForDebtDefaultPast2yrsOption')
+                    .dirty ||
+                    creditApplicationForm.get(
+                      'suedForDebtDefaultPast2yrsOption'
+                    ).touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Current Gross Income"
+              formControlName="currentGrossIncome"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.currentGrossIncome"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('currentGrossIncome')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('currentGrossIncome').dirty ||
+                    creditApplicationForm.get('currentGrossIncome').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <mat-select
+              (selectionChange)="onChangeSelfEmployedOption($event)"
+              placeholder="Are you Self Employed?"
+              required
+            >
+              <mat-option
+                *ngFor="let selfEmployedOption of selfEmployedOptions"
+                [value]="selfEmployedOption"
+              >
+                {{ selfEmployedOption }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngFor="let validation of validation_messages.selfEmployedOption"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('selfEmployedOption')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('selfEmployedOption').dirty ||
+                    creditApplicationForm.get('selfEmployedOption').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="selfEmployedOption === 'No'" class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Employer's Name"
+              formControlName="employerName"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.employerName"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('employerName')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('employerName').dirty ||
+                    creditApplicationForm.get('employerName').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="selfEmployedOption === 'No'" class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Years at Company"
+              formControlName="yearsAtCompany"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.yearsAtCompany"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('yearsAtCompany')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('yearsAtCompany').dirty ||
+                    creditApplicationForm.get('yearsAtCompany').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="selfEmployedOption === 'No'" class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Current Job Title"
+              formControlName="currentJobTitle"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.currentJobTitle"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('currentJobTitle')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('currentJobTitle').dirty ||
+                    creditApplicationForm.get('currentJobTitle').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="selfEmployedOption === 'No'" class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Supervisor's Name"
+              formControlName="supervisorName"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.supervisorName"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('supervisorName')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('supervisorName').dirty ||
+                    creditApplicationForm.get('supervisorName').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="selfEmployedOption === 'No'" class="col-4">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Supervisor's Phone"
+              formControlName="supervisorPhone"
+              required
+            />
+            <mat-error
+              *ngFor="let validation of validation_messages.supervisorPhone"
+            >
+              <mat-error
+                class="error-message"
+                *ngIf="
+                  creditApplicationForm
+                    .get('supervisorPhone')
+                    .hasError(validation.type) &&
+                  (creditApplicationForm.get('supervisorPhone').dirty ||
+                    creditApplicationForm.get('supervisorPhone').touched)
+                "
+                >{{ validation.message }}</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12">
+          <mat-checkbox formControlName="terms">
+            I accept terms and conditions
+          </mat-checkbox>
+          <mat-error *ngFor="let validation of validation_messages.terms">
+            <mat-error
+              class="error-message"
+              *ngIf="
+                creditApplicationForm.get('terms').hasError(validation.type) &&
+                (creditApplicationForm.get('terms').dirty ||
+                  creditApplicationForm.get('terms').touched)
+              "
+              >{{ validation.message }}</mat-error
+            >
+          </mat-error>
+        </div>
+      </div>
+
+      <button
+        class="submit-btn"
+        color="primary"
+        mat-raised-button
+        type="submit"
+        [disabled]="!creditApplicationForm.valid"
+      >
+        Submit Application
+      </button>
+    </form>
+  </div>
+</ng-template>
+<ng-template #alert>
+  <div class="d-flex align-items-center justify-content-center h-100">
+    <ng-container *ngIf="message === 'Loading'; then loading; else showMessage">
+    </ng-container>
+    <ng-template #loading>
+      <h5>Loading...</h5>
+    </ng-template>
+    <ng-template #showMessage>
+      <h5>
+        {{ message }}
+      </h5>
+    </ng-template>
+  </div>
+</ng-template>
