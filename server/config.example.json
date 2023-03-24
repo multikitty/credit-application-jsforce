@@ -1,0 +1,9 @@
+{
+  "PORT": 3000,
+  "loginUrl": "https://login.salesforce.com",
+  "instanceUrl": "",
+  "username": "",
+  "password": "",
+  "securityToken": "",
+  "sobjectId": ""
+}
