@@ -1,9 +1,0 @@
-{
-  "PORT": 3000,
-  "loginUrl": "https://login.salesforce.com",
-  "instanceUrl": "http://jakesfireworks012.my.salesforce.com",
-  "username": "admin@jakesfireworks.com",
-  "password": "LdkHY1gAx5WdUu",
-  "securityToken": "G7GDGMLrlcPd7yN3epnXDGGnD",
-  "sobjectId": "Credit_Application__c"
-}
